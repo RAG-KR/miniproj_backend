@@ -1,6 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:t_store/features/shop/screens/profile/widgets/profile_menu.dart';
 
 import '../../../../common/widgets/appbar/appbar.dart';
 import '../../../../common/widgets/texts/section_heading.dart';
@@ -43,19 +43,31 @@ class ProfileScreen extends StatelessWidget {
               const TSectionHeading (
                   title: 'Profile Information', showActionButton: false),
               const SizedBox (height: TSizes.spaceBtwItems),
-              Row(
-                children: [
-                  Expanded(flex: 3, child: Text('Name', style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodySmall, overflow: TextOverflow.ellipsis)),
-                  Expanded(flex: 5, child: Text('Darshan', style: Theme
-                      .of(context)
-                      .textTheme
-                      .bodyMedium, overflow: TextOverflow.ellipsis)),
-                  const Expanded(child: Icon(Iconsax.arrow_right_34, size: 18)),
-                ],
+              TProfileMenu(title:'Name',value:'Darshan',onPressed : (){}),
+              TProfileMenu(title:'Username',value:'Darshan',onPressed : (){}),
+
+              const SizedBox(height: TSizes.spaceBtwItems,),
+              const Divider(),
+              const SizedBox(height: TSizes.spaceBtwItems,),
+
+              const TSectionHeading(title: 'Personal Information',showActionButton: false,),
+              const SizedBox(height: TSizes.spaceBtwItems,),
+
+              TProfileMenu(onPressed: (){}, title: 'User Id', value: '45689',icon: Iconsax.copy,),
+              TProfileMenu(onPressed: (){}, title: 'Email', value: 'darshan@gmail.com'),
+              TProfileMenu(onPressed: (){}, title: 'Phone Number', value: '6362116320'),
+              TProfileMenu(onPressed: (){}, title: 'Gender', value: 'Male'),
+              TProfileMenu(onPressed: (){}, title: 'DOB', value: '14-06-2004'),
+              const Divider(),
+              const SizedBox(height: TSizes.spaceBtwItems,),
+
+              Center(
+                child: TextButton(
+                  onPressed: (){},
+                  child: const Text('Close Account',style: TextStyle(color: Colors.red),),
+                ),
               )
+
             ],
           ),
         ),
@@ -63,3 +75,4 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 }
+
