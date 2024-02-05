@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:t_store/common/products/product_card_vertical.dart';
 import 'package:t_store/common/widgets/custom_shapes/containers/circular_container.dart';
 import 'package:t_store/common/widgets/layouts/gridlayout.dart';
+import 'package:t_store/features/authentication/controllers/category_controller.dart';
 import 'package:t_store/features/authentication/controllers/home/home_controller.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
 import 'package:t_store/features/shop/subcatagories/sub_catagories.dart';
@@ -103,20 +104,29 @@ class ThomeCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 80,
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 6,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (_, index) {
-          return TVerticalImageText(
-            image: TImages.shoeIcon,
-            title: 'Shoes',
-            onTap: () => Get.to(()=>const SubCatagoriesScreen()),
+    final categoryController = Get.put(CategoryController());
+    return Obx(
+        (){
+          return SizedBox(
+            height: 80,
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: categoryController.featuredCategories.length,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (_, index) {
+                final category = categoryController.featuredCategories[index];
+                return TVerticalImageText(
+                  image: category.image,
+                  title: category.name,
+                  // image: TImages.productImage1,
+                  // title: 'shoes',
+                  onTap: () => Get.to(()=>const SubCatagoriesScreen()),
+
+                );
+              },
+            ),
           );
-        },
-      ),
+        }
     );
   }
 }
