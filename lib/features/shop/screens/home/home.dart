@@ -6,6 +6,7 @@ import 'package:t_store/common/widgets/custom_shapes/containers/circular_contain
 import 'package:t_store/common/widgets/layouts/gridlayout.dart';
 import 'package:t_store/features/authentication/controllers/home/home_controller.dart';
 import 'package:t_store/features/shop/screens/home/widgets/home_appbar.dart';
+import 'package:t_store/features/shop/subcatagories/sub_catagories.dart';
 import '../../../../common/widgets/custom_shapes/containers/primary_header_container.dart';
 import '../../../../common/widgets/custom_shapes/containers/search_container.dart';
 import '../../../../common/widgets/image_text_widgets/vertical_image_text.dart';
@@ -112,7 +113,7 @@ class ThomeCategories extends StatelessWidget {
           return TVerticalImageText(
             image: TImages.shoeIcon,
             title: 'Shoes',
-            onTap: () {},
+            onTap: () => Get.to(()=>const SubCatagoriesScreen()),
           );
         },
       ),
