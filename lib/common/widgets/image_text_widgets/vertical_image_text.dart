@@ -32,35 +32,24 @@ class TVerticalImageText extends StatelessWidget {
         padding: const EdgeInsets.only(right: TSizes.spaceBtwItems),
         child: Column(
           children: [
-            TCircularImage(
-              image: image,
-              fit: BoxFit.fitWidth,
-              padding: TSizes.sm * 1.4,
-              isNetworkImage: isNetworkImage,
-              backgroundColor: backgroundColor,
-              overlayColor: THelperFunctions.isDarkMode(context)
-                  ? TColors.black
-                  : TColors.white,
+            Container(
+              width: 56,
+              height: 56,
+              padding: const EdgeInsets.all(TSizes.sm),
+              decoration: BoxDecoration(
+                color: backgroundColor ??
+                    (THelperFunctions.isDarkMode(context)
+                        ? TColors.black
+                        : TColors.white),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              child: Center(
+                child: Image(
+                  image: NetworkImage(image),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            // Container(
-            //   width: 56,
-            //   height: 56,
-            //   padding: const EdgeInsets.all(TSizes.sm),
-            //   decoration: BoxDecoration(
-            //     color: backgroundColor ??
-            //         (THelperFunctions.isDarkMode(context)
-            //             ? TColors.black
-            //             : TColors.white),
-            //     borderRadius: BorderRadius.circular(100),
-            //   ),
-            //   child: Center(
-            //     child: Image(
-            //       image: NetworkImage(image),
-            //       fit: BoxFit.cover,
-            //       color: dark ? TColors.light : TColors.dark,
-            //     ),
-            //   ),
-            // ),
             const SizedBox(height: TSizes.spaceBtwItems / 2),
             SizedBox(
               width: 55,

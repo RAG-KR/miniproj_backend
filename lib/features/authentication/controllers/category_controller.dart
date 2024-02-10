@@ -29,8 +29,6 @@ class CategoryController extends GetxController {
           .toList());
     } catch (e) {
       const Text('error');
-    } finally {
-//Remove Loader
     }
   }
 }
