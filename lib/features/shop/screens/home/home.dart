@@ -22,6 +22,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductController());
     final controller = Get.put(HomeController());
     return Scaffold(
       body: SingleChildScrollView(
@@ -87,7 +88,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems),
-                    TGridLayout(itemCount: 6, itemBuilder: (_,index)=>const TProductCardVertical())
+                    TGridLayout(itemCount: 4, itemBuilder: (_,index)=>const TProductCardVertical())
                   ],
                 ))
           ],

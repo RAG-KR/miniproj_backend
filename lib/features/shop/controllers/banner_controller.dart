@@ -24,6 +24,8 @@
 //   isLoading.value = false;
 //   }
 // }
+import 'dart:html';
+
 import 'package:get/get.dart';
 import 'package:t_store/data/repositories/banners/banner_repository.dart';
 import '../../../utils/popups/loaders.dart';
@@ -60,7 +62,7 @@ class BannerController extends GetxController {
       //assign banners
       this.banners.assignAll(banners);
     } catch (e) {
-      TLoaders.errorSnackBar(title: 'Oh Snap!', message: e.toString());
+      Text("error");
     } finally {
       // Remove Loader
       isLoading.value = false;
