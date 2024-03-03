@@ -5,6 +5,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:t_store/common/widgets/productprice_text.dart';
 import 'package:t_store/common/widgets/t_product_titletext.dart';
 import 'package:t_store/features/shop/screens/Product_details/product_detail.dart';
+import 'package:t_store/serveices/dummy_data.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/sizes.dart';
 import '../../../../utils/helpers/helper_functions.dart';
@@ -13,7 +14,8 @@ import '../widgets/t_rounded_container.dart';
 import '../widgets/t_rounded_images.dart';
 
 class TProductCardVertical extends StatelessWidget {
-  const TProductCardVertical({super.key});
+  const TProductCardVertical({super.key, required this.product});
+  final ProductModel product;
 
   @override
   Widget build(BuildContext context) {

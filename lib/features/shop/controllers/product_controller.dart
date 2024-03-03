@@ -79,7 +79,7 @@ class ProductController extends GetxController {
       //fetch products
       final products = await productRepository.getFeaturedProducts();
       //assign products
-      featuredProducts.assignAll(products)
+      featuredProducts.assignAll(products);
     } catch (e) {
       Text('hello');
     } finally {

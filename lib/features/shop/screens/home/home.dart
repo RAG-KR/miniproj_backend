@@ -16,6 +16,7 @@ import '../../../../common/widgets/texts/section_heading.dart';
 import '../../../../utils/constants/colors.dart';
 import '../../../../utils/constants/image_strings.dart';
 import '../../../../utils/constants/sizes.dart';
+import '../../controllers/product_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -23,7 +24,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(ProductController());
-    final controller = Get.put(HomeController());
+    // final controller = Get.put(HomeController());
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -88,7 +89,18 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: TSizes.spaceBtwItems),
-                    TGridLayout(itemCount: 4, itemBuilder: (_,index)=>const TProductCardVertical())
+                    Obx((){
+                      if (controller.isLoading.value) {
+                        return const Center(
+                          child: CircularProgressIndicator(), // Add CircularProgressIndicator here
+                        );
+                      }
+                      if(controller.featuredProducts.isEmpty){
+                        return const Center(child: Text("no data found"));
+                      }
+                      return TGridLayout(itemCount: controller.featuredProducts.length, itemBuilder: (_,index)=> TProductCardVertical(product:controller.featuredProducts[index]),
+                      );
+                    })
                   ],
                 ))
           ],

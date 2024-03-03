@@ -1,7 +1,12 @@
+import 'dart:math';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:t_store/utils/exceptions/firebase_exceptions.dart';
+import 'package:t_store/utils/exceptions/platform_exceptions.dart';
 
 import '../../../features/shop/models/product_model.dart';
+import '../../../serveices/TFirebaseStorageServeice.dart';
 
 class ProductRepository extends GetxController {
   static ProductRepository get instance => Get.find();
@@ -10,6 +15,18 @@ class ProductRepository extends GetxController {
   final _db = FirebaseFirestore.instance;
 
   //get limited featured products
+  Future<List<ProductModel>> getFeaturedProducts() async{
+try{
+final snapshot = await _db.collection('Products').where('isFeatured' , isEqualTo: true).limit(4).get();
+return snapshot.docs.map((e) => ProductModel.fromSnapshot(e)).toList();
+}on FirebaseException catch(e) {
+  throw TFirebaseException(e.code).message;
+}on TPlatformException catch(e){
+  throw TPlatformException(e.code).message;
+}catch(e){
+  throw "something went wrong please try again";
+}
+}
 
 //upload  dummy data  to the cloud firebase
   /// Upload dummy data to the Cloud Firebase
@@ -20,9 +37,11 @@ class ProductRepository extends GetxController {
       // Loop through each product
       for (var product in products) {
         // Get image data link from local assets
-        final thumbnail = await storage.getImageDataFromAssets(product.thumbnail);
+        final thumbnail =
+            await storage.getImageDataFromAssets(product.thumbnail);
         // Upload image and get its URL
-        final url = await storage.uploadImageData('Products/Images', thumbnail, product.thumbnail.toString());
+        final url = await storage.uploadImageData(
+            'Products/Images', thumbnail, product.thumbnail.toString());
         // Assign URL to product.thumbnail attribute
         product.thumbnail = url;
         // Product list of images
@@ -32,7 +51,8 @@ class ProductRepository extends GetxController {
             // Get image data link from local assets
             final assetImage = await storage.getImageDataFromAssets(image);
             // Upload image and get its URL
-            final url = await storage.uploadImageData('Products/Images', assetImage, image);
+            final url = await storage.uploadImageData(
+                'Products/Images', assetImage, image);
             // Assign URL to product.thumbnail attribute
             imagesUrl.add(url);
           }
@@ -46,5 +66,4 @@ class ProductRepository extends GetxController {
       print('Error uploading dummy data: $e');
     }
   }
-
 }
